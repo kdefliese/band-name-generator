@@ -1,6 +1,9 @@
+'use strict';
+/*global $:false */
+
 $(function() {
 
-   $('form').on('submit', function(event) {
+  $('form').on('submit', function(event) {
     event.preventDefault();
     var adjective = $('#user-adjective').val();
     var noun = $('#user-noun').val();
@@ -13,42 +16,39 @@ $(function() {
         var confirm = response.msg;
         $('#adjectiveResult').html(confirm);
       });
-    };
+    }
+
     if (noun) {
       wordPost = {word: noun};
       $.post('/nouns', wordPost, function(response) {
         var confirm = response.msg;
         $('#nounResult').html(confirm);
       });
-    };
+    }
+
     if (verb) {
       wordPost = {word: verb};
       $.post('/verbs', wordPost, function(response) {
         var confirm = response.msg;
         $('#verbResult').html(confirm);
       });
-    };
-});
+    }
+  });
 
-
-  $("button").click(function() {
+  $('button').click(function() {
     $.get('/adjectives', function(response) {
       var adjective = response.word;
-      $("#adjective").text(adjective);
+      $('#adjective').text(adjective);
     });
 
     $.get('/verbs', function(response) {
       var verb = response.word;
-      $("#verb").text(verb);
+      $('#verb').text(verb);
     });
 
     $.get('/nouns', function(response) {
       var noun = response.word;
-      $("#noun").text(noun);
+      $('#noun').text(noun);
     });
-
   });
-
 });
-
-
